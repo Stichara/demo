@@ -1,0 +1,49 @@
+group 'by.it.company'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply from: "libs.gradle"
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //Spring dependencies
+    compile libs.spring_web
+    compile libs.spring_mvc
+    compile libs.spring_tx
+    compile libs.spring_orm
+
+    //Spring Security
+    compile libs.spring_security_web
+    compile libs.spring_security_taglib
+    compile libs.spring_security_core
+    compile libs.spring_security_config
+
+    // database dependencies
+    compile libs.hibernate_core
+    compile libs.mysql_connector
+
+    //json dependencies
+    compile libs.jackson_core
+    compile libs.jackson_databind
+    compile libs.jackson_annotations
+
+    // other dependencies
+    compile libs.servlet_api
+    compile libs.jstl
+    compile libs.log4j
+
+    // testing dependencies
+    testCompile libs.junit
+    testCompile libs.mockito
+    testCompile libs.spring_test
+
+
+
+}

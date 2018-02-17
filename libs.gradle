@@ -1,0 +1,44 @@
+ext{
+
+    junitVersion = '4.12'
+    springVersion = '4.3.7.RELEASE'
+    springSecurityVersion = '4.2.3.RELEASE'
+    hibernateVersion = '4.3.11.Final'
+
+    // dependencies
+    libs = [
+
+            //spring
+            spring_core: "org.springframework:spring-core:${springVersion}",
+            spring_web: "org.springframework:spring-web:${springVersion}",
+            spring_mvc: "org.springframework:spring-webmvc:${springVersion}",
+            spring_tx: "org.springframework:spring-tx:${springVersion}",
+            spring_orm: "org.springframework:spring-orm:${springVersion}",
+
+            //spring security
+            spring_security_web: "org.springframework.security:spring-security-web:${springSecurityVersion}",
+            spring_security_taglib: "org.springframework.security:spring-security-taglibs:${springSecurityVersion}",
+            spring_security_config: "org.springframework.security:spring-security-config:${springSecurityVersion}",
+            spring_security_core: "org.springframework.security:spring-security-core:${springSecurityVersion}",
+
+            //hibernate
+            hibernate_core: "org.hibernate:hibernate-core:${hibernateVersion}",
+            mysql_connector: "mysql:mysql-connector-java:5.1.13",
+
+            //json dependencies
+            jackson_core: "com.fasterxml.jackson.core:jackson-core:2.6.2",
+            jackson_databind: "com.fasterxml.jackson.core:jackson-databind:2.6.2",
+            jackson_annotations: "com.fasterxml.jackson.core:jackson-annotations:2.6.2",
+
+            //other
+            servlet_api: "javax.servlet:javax.servlet-api:3.1.0",
+            jstl: "jstl:jstl:1.2",
+            log4j : "log4j:log4j:1.2.17",
+
+            //testing
+            spring_test: "org.springframework:spring-test:3.2.3.RELEASE" ,
+            junit: "junit:junit:${junitVersion}",
+            mockito:  "org.mockito:mockito-all:1.10.19",
+
+    ]
+}
