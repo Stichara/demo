@@ -61,6 +61,7 @@ public class TestEmployeeController {
     }
 
 
+    @Ignore
     @Test
     public void getAllEmployeesTest() throws Exception {
 

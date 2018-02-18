@@ -1,7 +1,6 @@
 package by.it.company.demoSpringHibernate.services.managers.impl;
 
-import by.it.company.demoSpringHibernate.dao.entities.User;
-import by.it.company.demoSpringHibernate.dao.entities.UserRoleEnum;
+import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Service
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
     @Autowired
@@ -22,10 +21,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userManager.getUserTest("loginName");
-//        User user = userManager.getUser(username);
+//        User user = userManager.getUserTest("loginName");
+        UserModel user = userManager.getUser(username);
         Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
+        roles.add(new SimpleGrantedAuthority(user.role));
         UserDetails userDetails =
                 new org.springframework.security.core.userdetails.User(user.getLogin(),
                         user.getPswd(),
