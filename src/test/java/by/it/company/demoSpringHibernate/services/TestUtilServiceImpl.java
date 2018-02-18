@@ -1,8 +1,11 @@
 package by.it.company.demoSpringHibernate.services;
 
 import by.it.company.demoSpringHibernate.dao.entities.Employee;
+import by.it.company.demoSpringHibernate.dao.entities.Role;
+import by.it.company.demoSpringHibernate.dao.entities.User;
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
+import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.impl.UtilsServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +39,7 @@ public class TestUtilServiceImpl {
     }
 
     @Test
-    public void createEmployeeModelListTest() throws Exception {
+    public void creaгteEmployeeModelListTest() throws Exception {
 
         List<Employee> employees = new ArrayList<>();
         employees.add(new Employee(1L,"name1","surname1"));
@@ -49,5 +52,14 @@ public class TestUtilServiceImpl {
         employeeModels.add(new EmployeeModel(3L,"name3", "surname3"));
 
         assertEquals(utilsService.createEmployeeModelList(employees),employeeModels);
+    }
+
+    @Test
+    public void createUserModelTest() throws Exception{
+        User user = new User("user","pswd", new Role("ADMIN"));
+        UserModel userModel = new UserModel("user","pswd","ADMIN");
+
+        assertEquals(utilsService.createUserModel(user),userModel);
+
     }
 }

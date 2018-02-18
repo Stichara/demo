@@ -79,6 +79,30 @@ public class EmployeeManagerImpl implements IEmployeeManager {
         }
     }
 
+    /**
+     * method get list employees with like surname
+     * @param surname - employee surname
+     * @return - list with employee models or empty list
+     * @throws ServicesException
+     */
+    @Override
+    public List getEmployee(String surname) throws ServicesException {
+        try{
+            List employees = employeeDao.getEmployeeBySurname(surname);
+            return utilsService.createEmployeeModelList(employees);
+        }catch (DaoException e){
+            logger.error("[EmployeeServiceImpl/getEmployee] could not get employee by surname:"+surname+": " + e.getLocalizedMessage());
+            throw new ServicesException("could not get employees");
+        }
+    }
+
+    /**
+     * method update employee info
+     * @param idEmployee - employee id who will be changed
+     * @param employeeModel - new employee info
+     * @return true - if update is ok, false - if update has exception
+     * @throws ServicesException
+     */
     @Override
     public boolean updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException {
         try{
@@ -94,16 +118,24 @@ public class EmployeeManagerImpl implements IEmployeeManager {
         }
     }
 
+    /**
+     * method delete employee by id
+     * @param idEmployee - id employee who will be deleted
+     * @return true - if delete ok, false - if delete has exception
+     * @throws ServicesException
+     */
     @Override
     public boolean deleteEmployee(Long idEmployee) throws ServicesException{
         try{
             Employee employee = employeeDao.get(idEmployee);
             if (employee == null) return false;
             employeeDao.delete(employee);
+            return true;
         }catch (DaoException e){
             logger.error("[EmployeeServiceImpl/deleteEmployee] could not delete employee id:"+idEmployee+": " + e.getLocalizedMessage());
             throw new ServicesException("could not delete the employees");
         }
-        return false;
     }
+
+
 }

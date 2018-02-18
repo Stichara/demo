@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface IFacadeServices {
 
-    // employee
+    // employee methods
     EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException;
 
     List getEmployeesList() throws ServicesException;
@@ -18,4 +18,6 @@ public interface IFacadeServices {
     boolean updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException;
 
     boolean deleteEmployee(Long idEmployee) throws ServicesException;
+
+    List getEmployee(String surname) throws ServicesException;
 }

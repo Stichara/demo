@@ -43,7 +43,6 @@ public class TestsEmployeeManagerImpl {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Ignore
     @Test
     public void addNewEmployeeTest() throws Exception {
         EmployeeModel employeeModel = new EmployeeModel(4L,"name","surname");
@@ -58,7 +57,7 @@ public class TestsEmployeeManagerImpl {
     }
 
     @Test
-    public void getEmployeTest() throws Exception {
+    public void getEmployeeTest() throws Exception {
         EmployeeModel compareModel = new EmployeeModel(1L,"name","surname");
         Employee employee = new Employee(1L,"name", "surname");
 
@@ -117,6 +116,49 @@ public class TestsEmployeeManagerImpl {
 
     @Test
     public void deleteEmployeeTest() throws Exception {
+
+        Employee employee = new Employee(2L, "name2","name2");
+
+        when(employeeDao.get(1L)).thenReturn(null);
+        when(employeeDao.get(2L)).thenReturn(employee);
+        doNothing().when(employeeDao).delete(any(Employee.class));
+
+        assertEquals(employeeManager.deleteEmployee(1L), false);
+        verify(employeeDao, times(1)).get(1L);
+        verify(employeeDao, times(0)).delete(any(Employee.class));
+
+        assertEquals(employeeManager.deleteEmployee(2L), true);
+        verify(employeeDao, times(1)).get(2L);
+        verify(employeeDao, times(1)).delete(any(Employee.class));
+
+    }
+
+    @Test
+    public void getEmployeeBySurnameTest() throws Exception{
+        String surname = "surname";
+        String surname2 = "surname2";
+
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1L,"name1","surname"));
+        employees.add(new Employee(2L,"name2", "surname"));
+        employees.add(new Employee(3L,"name3", "surname"));
+
+        List<EmployeeModel> employeeModels = new ArrayList<>();
+        employeeModels.add(new EmployeeModel(1L,"name1","surname"));
+        employeeModels.add(new EmployeeModel(2L,"name2", "surname"));
+        employeeModels.add(new EmployeeModel(3L,"name3", "surname"));
+
+        when(employeeDao.getEmployeeBySurname(surname)).thenReturn(employees);
+        when(employeeDao.getEmployeeBySurname(surname2)).thenReturn(new ArrayList());
+
+        assertEquals(employeeManager.getEmployee(surname),employeeModels);
+        List result = employeeManager.getEmployee(surname2);
+        assertEquals(result.size(),0);
+        verify(employeeDao,times(1)).getEmployeeBySurname(surname);
+        verify(employeeDao,times(1)).getEmployeeBySurname(surname2);
+        verify(utilsService, times(2)).createEmployeeModelList(anyList());
+
+
 
     }
 }

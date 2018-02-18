@@ -1,8 +1,10 @@
 package by.it.company.demoSpringHibernate.services.managers.impl;
 
 import by.it.company.demoSpringHibernate.dao.entities.Employee;
+import by.it.company.demoSpringHibernate.dao.entities.User;
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
+import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +37,7 @@ public class UtilsServiceImpl implements IUtilsService {
      */
     @Override
     public EmployeeModel createEmployeeModel(Employee employee) throws ServicesException {
-        if (employee == null) throw new ServicesException("Error create model employee: parametre can not be null");
+        if (employee == null) throw new ServicesException("Error create model employee: parameter can not be null");
         return new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname());
     }
 
@@ -50,5 +52,17 @@ public class UtilsServiceImpl implements IUtilsService {
         return employees.stream()
                 .map(employee -> new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname()))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Method create user model from user entity
+     * @param user - user entity with information
+     * @return UserModel with information
+     * @throws ServicesException
+     */
+    @Override
+    public UserModel createUserModel(User user) throws ServicesException {
+        if (user == null) throw new ServicesException("Error create user model: parameter can not be null");
+        return new UserModel(user.getLogin(),user.getPswd(),user.getRole().getName());
     }
 }

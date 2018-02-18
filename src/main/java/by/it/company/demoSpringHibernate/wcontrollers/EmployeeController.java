@@ -62,7 +62,7 @@ public class EmployeeController {
         }
     }
 
-    @RequestMapping(value = "employee/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.PUT)
     public ResponseEntity updateEmployee(@PathVariable("idEmployee") Long idEmployee,
                                          @RequestBody EmployeeModel employeeModel) throws Exception{
 
@@ -77,7 +77,7 @@ public class EmployeeController {
         }
     }
 
-    @RequestMapping(value = "employee/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@PathVariable("idEmployee") Long idEmployee) throws Exception{
         try{
             if (facadeServices.deleteEmployee(idEmployee))
@@ -87,6 +87,18 @@ public class EmployeeController {
             logger.debug("[EmployeeController/deleteEmployee]: "+e.getLocalizedMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @RequestMapping(value = "employee/{surname}", method = RequestMethod.GET)
+    public ResponseEntity getUsersBySurname(@PathVariable("surname") String surname) throws Exception{
+        try{
+            List employees = facadeServices.getEmployee(surname);
+            return new ResponseEntity(employees, HttpStatus.OK);
+        }catch (ServiceException e){
+            logger.debug("[EmployeeController/getUsersBySurname]: "+e.getLocalizedMessage());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 

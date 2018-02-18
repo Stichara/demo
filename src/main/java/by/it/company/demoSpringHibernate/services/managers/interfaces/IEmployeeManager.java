@@ -17,4 +17,6 @@ public interface IEmployeeManager {
     boolean updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException;
 
     boolean deleteEmployee(Long idEmployee) throws ServicesException;
+
+    List getEmployee(String surname) throws ServicesException;
 }

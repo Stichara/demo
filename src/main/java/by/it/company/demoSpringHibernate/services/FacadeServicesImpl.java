@@ -39,4 +39,9 @@ public class FacadeServicesImpl implements IFacadeServices {
     public boolean deleteEmployee(Long idEmployee) throws ServicesException{
         return employeeService.deleteEmployee(idEmployee);
     }
+
+    @Override
+    public List getEmployee(String surname) throws ServicesException {
+        return employeeService.getEmployee(surname);
+    }
 }
