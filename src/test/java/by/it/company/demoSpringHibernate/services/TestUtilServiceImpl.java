@@ -3,7 +3,6 @@ package by.it.company.demoSpringHibernate.services;
 import by.it.company.demoSpringHibernate.dao.entities.Employee;
 import by.it.company.demoSpringHibernate.dao.entities.Role;
 import by.it.company.demoSpringHibernate.dao.entities.User;
-import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.impl.UtilsServiceImpl;

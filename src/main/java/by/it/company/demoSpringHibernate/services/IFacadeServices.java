@@ -13,7 +13,7 @@ public interface IFacadeServices {
     @Secured({"ROLE_ADMIN","ROLE_USER"})
     EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException;
 
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
+    @Secured({"USER","ADMIN"})
     List getEmployeesList() throws ServicesException;
 
     @Secured({"ROLE_ADMIN","ROLE_USER"})

@@ -8,6 +8,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +23,9 @@ public class EmployeeController {
     @Autowired
     IFacadeServices facadeServices;
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee", method = RequestMethod.GET)
-    public ResponseEntity getAllEmployees() throws Exception{
+    public ResponseEntity<List> getAllEmployees() throws Exception{
         try{
             List employees = facadeServices.getEmployeesList();
             return new ResponseEntity(employees, HttpStatus.OK);
@@ -33,6 +35,7 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.GET)
     public ResponseEntity getEmployee(@PathVariable("idEmployee") Long idEmployee)throws Exception{
         try{
@@ -45,7 +48,7 @@ public class EmployeeController {
         }
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "employee", method = RequestMethod.POST)
     public ResponseEntity<EmployeeModel> addNewEmployee(@RequestBody EmployeeModel newEmployee) throws Exception{
 
@@ -62,6 +65,7 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.PUT)
     public ResponseEntity updateEmployee(@PathVariable("idEmployee") Long idEmployee,
                                          @RequestBody EmployeeModel employeeModel) throws Exception{
@@ -77,6 +81,7 @@ public class EmployeeController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@PathVariable("idEmployee") Long idEmployee) throws Exception{
         try{
@@ -89,7 +94,8 @@ public class EmployeeController {
         }
     }
 
-    @RequestMapping(value = "employee/{surname}", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('USER')")
+//    @RequestMapping(value = "employee/{surname}", method = RequestMethod.GET)
     public ResponseEntity getUsersBySurname(@PathVariable("surname") String surname) throws Exception{
         try{
             List employees = facadeServices.getEmployee(surname);

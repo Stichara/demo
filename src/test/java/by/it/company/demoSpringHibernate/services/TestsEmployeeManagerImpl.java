@@ -2,15 +2,11 @@ package by.it.company.demoSpringHibernate.services;
 
 import by.it.company.demoSpringHibernate.dao.entities.Employee;
 import by.it.company.demoSpringHibernate.dao.interfaces.IEmployeeDao;
-import by.it.company.demoSpringHibernate.exceptions.DaoException;
-import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.services.managers.impl.EmployeeManagerImpl;
 import by.it.company.demoSpringHibernate.services.managers.impl.UtilsServiceImpl;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -23,7 +19,6 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 

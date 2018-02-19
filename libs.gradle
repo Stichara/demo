@@ -36,7 +36,7 @@ ext{
             log4j : "log4j:log4j:1.2.17",
 
             //testing
-            spring_test: "org.springframework:spring-test:3.2.3.RELEASE" ,
+            spring_test: "org.springframework:spring-test:${springVersion}" ,
             junit: "junit:junit:${junitVersion}",
             mockito:  "org.mockito:mockito-all:1.10.19",
 

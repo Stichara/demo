@@ -9,7 +9,6 @@ import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsServ
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component

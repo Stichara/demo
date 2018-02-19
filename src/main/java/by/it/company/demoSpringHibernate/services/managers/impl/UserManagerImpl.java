@@ -46,12 +46,4 @@ public class UserManagerImpl implements IUserManager {
         return new UserModel("","","");
     }
 
-    @Override
-    public User getUserTest(String login) {
-        User user = new User();
-        user.setLogin(login);
-        user.setPswd("7110eda4d09e062aa5e4a390b0a572ac0d2c0220");
-
-        return user;
-    }
 }

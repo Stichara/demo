@@ -1,8 +1,9 @@
 package by.it.company.demoSpringHibernate.wcontrollers;
 
-import by.it.company.demoSpringHibernate.config.AppConfig;
+
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.services.IFacadeServices;
+import by.it.company.demoSpringHibernate.utils.TestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,35 +13,26 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
-//@ContextConfiguration(classes = {AppConfig.class})
-//@WebAppConfiguration
 public class TestEmployeeController {
 
     private MockMvc mockMvc;
-
-    @Autowired
-    private WebApplicationContext wac;
 
     @Mock
     private IFacadeServices facadeServices;
@@ -61,7 +53,6 @@ public class TestEmployeeController {
     }
 
 
-    @Ignore
     @Test
     public void getAllEmployeesTest() throws Exception {
 
@@ -70,14 +61,56 @@ public class TestEmployeeController {
         employees.add(new EmployeeModel(2l,"name2","surname2"));
         employees.add(new EmployeeModel(3l, "name3", "surname3"));
 
-
-
         when(facadeServices.getEmployeesList()).thenReturn(employees);
         mockMvc.perform(get("/employee"))
+                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
 
-//        when(facadeServices.getEmployee(1L)).thenReturn(Optional.empty());
-//        mockMvc.perform(get("/employee/1"))
-//                .andExpect(status().isBadRequest());
+        verify(facadeServices,times(1)).getEmployeesList();
+
+    }
+
+    @Test
+    public void getEmployeeTest() throws Exception {
+        EmployeeModel employee = new EmployeeModel(1L,"name","surname" );
+
+        when(facadeServices.getEmployee(1L)).thenReturn(Optional.of(employee));
+        when(facadeServices.getEmployee(2L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/employee/{idEmployee}",1))
+                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/employee/{idEmployee}",2))
+                .andExpect(status().isBadRequest());
+
+        verify(facadeServices, times(1)).getEmployee(1l);
+        verify(facadeServices, times(1)).getEmployee(2l);
+
+    }
+
+    @Test
+    public void addNewEmployeeTest() throws Exception {
+
+    }
+
+    @Test
+    public void updateEmployeeTest() throws Exception {
+
+    }
+
+    @Test
+    public void deleteEmployeeTest() throws Exception {
+        when(facadeServices.deleteEmployee(1L)).thenReturn(true);
+        when(facadeServices.deleteEmployee(2L)).thenReturn(false);
+
+        mockMvc.perform(delete("/employee/{idEmployee}",1L))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(delete("/employee/{idEmployee}",2L))
+                .andExpect(status().isBadRequest());
+
+        verify(facadeServices, times(1)).deleteEmployee(1l);
+        verify(facadeServices, times(1)).deleteEmployee(2l);
     }
 }

@@ -14,7 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -35,13 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        //request config
+        http.authorizeRequests()
+                .antMatchers("/resources/**").permitAll()
+                .anyRequest().authenticated();
+
         //csrf and resources configuration
-        http.csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/resources/**", "/**").permitAll()
-                .anyRequest().permitAll()
-                .and();
+        http
+                .csrf()
+                .disable();
 
         // login page configuration
         http.formLogin()
