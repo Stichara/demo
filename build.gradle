@@ -18,6 +18,7 @@ dependencies {
     compile libs.spring_mvc
     compile libs.spring_tx
     compile libs.spring_orm
+    compile libs.spring_data
 
     //Spring Security
     compile libs.spring_security_web
