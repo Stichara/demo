@@ -17,12 +17,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class EmployeeManagerImpl implements IEmployeeManager {
+public class EmployeeManagerImpl{ //implements IEmployeeManager {
 
     private Logger logger = Logger.getLogger(EmployeeManagerImpl.class);
 
     @Autowired
-    IEmployeeDao employeeDao;
+    private IEmployeeDao employeeDao;
 
     @Autowired
     IUtilsService utilsService;
@@ -33,11 +33,11 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      * @return - new employee model with id
      * @throws ServicesException - exceptions services layer
      */
-    @Override
-    public EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException {
+//    @Override
+    public Optional<EmployeeModel> addNewEmployee(EmployeeModel newEmployee) throws ServicesException {
         Employee employee = new Employee(newEmployee.firstName, newEmployee.surname);
         try {
-            Long id = (Long)employeeDao.add(employee);
+            Long id  = (Long) employeeDao.add(employee);
             return utilsService.createEmployeeModel(employee);
         } catch (DaoException e) {
             logger.error("[EmployeeServiceImpl/addNewEmployee] can not save new employee: "+employee.toString() + e.getLocalizedMessage());
@@ -50,8 +50,8 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      * @return employee model list
      * @throws ServicesException
      */
-    @Override
-    public List<EmployeeModel> getEmployeesList() throws ServicesException {
+//    @Override
+    public List getEmployeesList() throws ServicesException {
         try {
             List employees = employeeDao.getAll();
             return utilsService.createEmployeeModelList(employees);
@@ -67,8 +67,8 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      * @return if employee is exist returnt optional with EmployeerModel,
      *          if employee isn`t exist return empty optional
      */
-    @Override
-    public Optional<EmployeeModel> getEmployee(Long idEmployee) throws ServicesException{
+//    @Override
+    public Optional<Optional<EmployeeModel>> getEmployee(Long idEmployee) throws ServicesException{
         try{
             Employee employee = employeeDao.get(idEmployee);
             if (employee == null) return Optional.empty();
@@ -85,7 +85,7 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      * @return - list with employee models or empty list
      * @throws ServicesException
      */
-    @Override
+//    @Override
     public List getEmployee(String surname) throws ServicesException {
         try{
             List employees = employeeDao.getEmployeeBySurname(surname);
@@ -103,7 +103,7 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      * @return true - if update is ok, false - if update has exception
      * @throws ServicesException
      */
-    @Override
+//    @Override
     public boolean updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException {
         try{
             Employee employee = employeeDao.get(idEmployee);
@@ -124,7 +124,7 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      * @return true - if delete ok, false - if delete has exception
      * @throws ServicesException
      */
-    @Override
+//    @Override
     public boolean deleteEmployee(Long idEmployee) throws ServicesException{
         try{
             Employee employee = employeeDao.get(idEmployee);

@@ -7,13 +7,14 @@ import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.models.UserModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUtilsService {
     EmployeeModel createEmployeeModel(Long id, Employee employee) throws ServicesException;
 
-    EmployeeModel createEmployeeModel(Employee employee) throws ServicesException;
+    Optional<EmployeeModel> createEmployeeModel(Employee employee);
 
-    List createEmployeeModelList(List<Employee> employees) throws ServicesException;
+    List<EmployeeModel> createEmployeeModelList(List<Employee> employees);
 
-    UserModel createUserModel(User user) throws ServicesException;
+    UserModel createUserModel(User user);
 }

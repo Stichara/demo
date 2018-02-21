@@ -2,6 +2,7 @@ package by.it.company.demoSpringHibernate.services.managers.impl;
 
 import by.it.company.demoSpringHibernate.dao.entities.User;
 import by.it.company.demoSpringHibernate.dao.interfaces.IUserDao;
+import by.it.company.demoSpringHibernate.dao.repositories.UserRepository;
 import by.it.company.demoSpringHibernate.exceptions.DaoException;
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.UserModel;
@@ -21,7 +22,7 @@ public class UserManagerImpl implements IUserManager {
     private Logger logger = Logger.getLogger(UserManagerImpl.class);
 
     @Autowired
-    private IUserDao userDao;
+    private UserRepository userRepository;
 
     @Autowired
     private IUtilsService utilsService;
@@ -34,16 +35,10 @@ public class UserManagerImpl implements IUserManager {
      */
     @Override
     public UserModel getUser(String login) {
-        try {
-            User user = userDao.getUserByLogin(login);
-            return utilsService.createUserModel(user);
-        }catch (DaoException e){
-            logger.error("[UserManagerImpl/getUser] can not get user by login : "+login+": " +e.getLocalizedMessage() );
-        }catch (ServicesException e){
-            logger.error("[UserManagerImpl/getUser] can not create user model: " +e.getLocalizedMessage() );
-        }
+        Optional<User> user = userRepository.findById(login);
+        return user.flatMap(utilsService::createUserModel)
+                .orElse(new UserModel("","",""))
 
-        return new UserModel("","","");
     }
 
 }

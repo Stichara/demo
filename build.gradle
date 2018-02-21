@@ -27,6 +27,7 @@ dependencies {
     compile libs.spring_security_config
 
     // database dependencies
+//    compile libs.hibernate_entitymanager
     compile libs.hibernate_core
     compile libs.mysql_connector
 

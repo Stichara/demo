@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface IEmployeeManager {
 
-    EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException;
+    Optional<EmployeeModel> addNewEmployee(EmployeeModel newEmployee) throws ServicesException;
 
-    Optional<EmployeeModel> getEmployee(Long idEmployee) throws ServicesException;
+   Optional<EmployeeModel> getEmployee(Long idEmployee) throws ServicesException;
 
-    List<EmployeeModel> getEmployeesList() throws ServicesException;
+    List getEmployeesList() throws ServicesException;
 
-    boolean updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException;
+    void updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException;
 
     boolean deleteEmployee(Long idEmployee) throws ServicesException;
 

@@ -9,6 +9,7 @@ import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsServ
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -35,9 +36,11 @@ public class UtilsServiceImpl implements IUtilsService {
      * @throws ServicesException
      */
     @Override
-    public EmployeeModel createEmployeeModel(Employee employee) throws ServicesException {
-        if (employee == null) throw new ServicesException("Error create model employee: parameter can not be null");
-        return new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname());
+    public Optional<EmployeeModel> createEmployeeModel(Employee employee) {
+//        if (employee == null) throw new ServicesException("Error create model employee: parameter can not be null");
+        return Optional.of(
+                new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname())
+        );
     }
 
     /**
@@ -47,7 +50,7 @@ public class UtilsServiceImpl implements IUtilsService {
      * @throws ServicesException
      */
     @Override
-    public List<EmployeeModel> createEmployeeModelList(List<Employee> employees) throws ServicesException {
+    public List<EmployeeModel> createEmployeeModelList(List<Employee> employees){
         return employees.stream()
                 .map(employee -> new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname()))
                 .collect(Collectors.toList());
@@ -57,11 +60,10 @@ public class UtilsServiceImpl implements IUtilsService {
      * Method create user model from user entity
      * @param user - user entity with information
      * @return UserModel with information
-     * @throws ServicesException
      */
     @Override
-    public UserModel createUserModel(User user) throws ServicesException {
-        if (user == null) throw new ServicesException("Error create user model: parameter can not be null");
+    public UserModel createUserModel(User user) {
+//        if (user == null) throw new ServicesException("Error create user model: parameter can not be null");
         return new UserModel(user.getLogin(),user.getPswd(),user.getRole().getName());
     }
 }
