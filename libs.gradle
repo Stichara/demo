@@ -2,7 +2,7 @@ ext{
 
     junitVersion = '4.12'
     springVersion = '4.3.7.RELEASE'
-    springDataVersion = '2.0.3.RELEASE'
+    springDataVersion = '2.0.4.RELEASE'
     springSecurityVersion = '4.2.3.RELEASE'
     hibernateVersion = '5.2.13.Final'
     hibernateEntityManagerVersion = '5.2.2.Final'

@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("by.it.company.demoSpringHibernate.dao.repositories")
+@EnableJpaRepositories(basePackages = "by.it.company.demoSpringHibernate.dao.repositories")
 public class DataConfig {
 
     private static final String PROP_DATABASE_DRIVER = "db.driver";
