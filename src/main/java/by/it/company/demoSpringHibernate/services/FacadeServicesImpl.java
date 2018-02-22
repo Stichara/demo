@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class FacadeServicesImpl implements IFacadeServices {
@@ -21,23 +20,23 @@ public class FacadeServicesImpl implements IFacadeServices {
     }
 
     @Override
-    public List getEmployeesList() throws ServicesException{
+    public List getEmployeesList() throws ServicesException {
         return employeeService.getEmployeesList();
     }
 
     @Override
-    public Optional<EmployeeModel> getEmployee(Long idEmployee) throws ServicesException {
+    public EmployeeModel getEmployee(Long idEmployee) throws ServicesException {
         return employeeService.getEmployee(idEmployee);
     }
 
     @Override
-    public boolean updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException {
-        return employeeService.updateEmployee(idEmployee, employeeModel);
+    public void updateEmployee(Long idEmployee, EmployeeModel employeeModel) throws ServicesException {
+        employeeService.updateEmployee(idEmployee, employeeModel);
     }
 
     @Override
-    public boolean deleteEmployee(Long idEmployee) throws ServicesException{
-        return employeeService.deleteEmployee(idEmployee);
+    public void deleteEmployee(Long idEmployee) throws ServicesException {
+        employeeService.deleteEmployee(idEmployee);
     }
 
     @Override

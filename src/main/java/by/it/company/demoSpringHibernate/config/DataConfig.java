@@ -1,5 +1,6 @@
 package by.it.company.demoSpringHibernate.config;
 
+
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,18 +11,19 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
-//
-//@Configuration
-//@EnableTransactionManagement
-//@ComponentScan("by.it.company.demoSpringHibernate")
-//@PropertySource("classpath:application.properties")
-//@EnableJpaRepositories("by.it.company.demoSpringHibernate.dao.repositories")
+
+@Configuration
+@EnableTransactionManagement
+@PropertySource("classpath:application.properties")
+@EnableJpaRepositories("by.it.company.demoSpringHibernate.dao.repositories")
 public class DataConfig {
+
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
     private static final String PROP_DATABASE_URL = "db.url";
@@ -50,12 +52,14 @@ public class DataConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
-        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
+//        entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactoryBean.setPackagesToScan(new String[]{env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN)});
 
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
 
         return entityManagerFactoryBean;
+
     }
 
     @Bean
@@ -74,6 +78,5 @@ public class DataConfig {
 
         return properties;
     }
-
 
 }

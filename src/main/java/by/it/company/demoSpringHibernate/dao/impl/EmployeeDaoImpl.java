@@ -7,12 +7,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
 @Repository
-@Transactional
+//@Transactional
 public class EmployeeDaoImpl  extends AbstractDaoImpl<Employee,Serializable> implements IEmployeeDao{
 
     public EmployeeDaoImpl() {

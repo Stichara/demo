@@ -10,12 +10,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+//@Transactional
 public class EmployeeManagerImpl2 implements IEmployeeManager {
 
     private Logger logger = Logger.getLogger(EmployeeManagerImpl.class);
@@ -33,9 +33,10 @@ public class EmployeeManagerImpl2 implements IEmployeeManager {
      * @return - new employee model with id
      */
     @Override
-    public Optional<EmployeeModel> addNewEmployee(EmployeeModel newEmployee) {
+    public EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException {
         Employee employee = employeeRepository.save(new Employee(newEmployee.firstName, newEmployee.surname));
-        return utilsService.createEmployeeModel(employee);
+        return utilsService.createEmployeeModel(employee)
+                .orElseThrow(() -> new ServicesException("employee is not created"));
     }
 
     /**
@@ -53,15 +54,15 @@ public class EmployeeManagerImpl2 implements IEmployeeManager {
      * Method get employee info by employee id
      *
      * @param idEmployee - employee id
-     * @return if employee is exist returnt optional with EmployeeModel,
+     * @return if employee is exist returnt EmployeeModel,
      * @throws ServicesException - if if employee isn`t exist return
      */
     @Override
-    public Optional <EmployeeModel> getEmployee(Long idEmployee) throws ServicesException {
+    public EmployeeModel getEmployee(Long idEmployee) throws ServicesException {
 
         Optional<Employee> employee = employeeRepository.findById(idEmployee);
-        return Optional.of(employee.flatMap(utilsService::createEmployeeModel)
-                .orElseThrow(() -> new ServicesException("such item was not found")));
+        return employee.flatMap(utilsService::createEmployeeModel)
+                .orElseThrow(() -> new ServicesException("such item was not found"));
     }
 
     /**
@@ -101,10 +102,8 @@ public class EmployeeManagerImpl2 implements IEmployeeManager {
      * @throws ServicesException
      */
     @Override
-    public boolean deleteEmployee(Long idEmployee) {
+    public void deleteEmployee(Long idEmployee) {
         employeeRepository.deleteById(idEmployee);
-        return true;
-
     }
 
 

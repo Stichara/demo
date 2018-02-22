@@ -62,8 +62,8 @@ public class UtilsServiceImpl implements IUtilsService {
      * @return UserModel with information
      */
     @Override
-    public UserModel createUserModel(User user) {
+    public Optional<UserModel> createUserModel(User user) {
 //        if (user == null) throw new ServicesException("Error create user model: parameter can not be null");
-        return new UserModel(user.getLogin(),user.getPswd(),user.getRole().getName());
+        return Optional.of(new UserModel(user.getLogin(),user.getPswd(),user.getRole().getName()));
     }
 }

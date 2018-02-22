@@ -28,7 +28,8 @@ dependencies {
 
     // database dependencies
 //    compile libs.hibernate_entitymanager
-    compile libs.hibernate_core
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.7.Final'
+//    compile libs.hibernate_core
     compile libs.mysql_connector
 
     //json dependencies

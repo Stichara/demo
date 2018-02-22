@@ -12,11 +12,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional
+//@Transactional
 public class UserManagerImpl implements IUserManager {
 
     private Logger logger = Logger.getLogger(UserManagerImpl.class);
@@ -37,8 +37,7 @@ public class UserManagerImpl implements IUserManager {
     public UserModel getUser(String login) {
         Optional<User> user = userRepository.findById(login);
         return user.flatMap(utilsService::createUserModel)
-                .orElse(new UserModel("","",""))
-
+                .orElse(new UserModel("","",""));
     }
 
 }

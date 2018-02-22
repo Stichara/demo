@@ -33,7 +33,7 @@ public class TestUtilServiceImpl {
         Employee employee = new Employee(1L,"name","surname");
         EmployeeModel compareModel = new EmployeeModel(1L,"name","surname");
 
-        assertEquals( utilsService.createEmployeeModel(employee), compareModel);
+        assertEquals( utilsService.createEmployeeModel(employee).get(), compareModel);
 
     }
 
@@ -58,7 +58,7 @@ public class TestUtilServiceImpl {
         User user = new User("user","pswd", new Role("ADMIN"));
         UserModel userModel = new UserModel("user","pswd","ADMIN");
 
-        assertEquals(utilsService.createUserModel(user),userModel);
+        assertEquals(utilsService.createUserModel(user).get(),userModel);
 
     }
 }

@@ -8,11 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-@Transactional
+//@Transactional
 public class AbstractDaoImpl<T, PK extends Serializable> implements IDao<T, PK> {
 
     @Autowired

@@ -16,5 +16,5 @@ public interface IUtilsService {
 
     List<EmployeeModel> createEmployeeModelList(List<Employee> employees);
 
-    UserModel createUserModel(User user);
+    Optional<UserModel> createUserModel(User user);
 }
