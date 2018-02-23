@@ -24,7 +24,7 @@ public class EmployeeController {
     IFacadeServices facadeServices;
 
     @RequestMapping(value = "/")
-    public ResponseEntity helloPage(){
+    public ResponseEntity helloPage() {
 
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -32,43 +32,25 @@ public class EmployeeController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee", method = RequestMethod.GET)
     public ResponseEntity<List> getAllEmployees() throws Exception {
-        try {
-            List employees = facadeServices.getEmployeesList();
-            return new ResponseEntity(employees, HttpStatus.OK);
-        } catch (ServiceException e) {
-            logger.debug("[EmployeeController/getAllEmployees]: " + e.getLocalizedMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        List employees = facadeServices.getEmployeesList();
+        return new ResponseEntity(employees, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.GET)
     public ResponseEntity getEmployee(@PathVariable("idEmployee") Long idEmployee) throws Exception {
-        try {
-            EmployeeModel employee = facadeServices.getEmployee(idEmployee);
-//            if (!employee.isPresent()) return new ResponseEntity(HttpStatus.BAD_REQUEST);
-            return new ResponseEntity(employee, HttpStatus.OK);
-        } catch (ServiceException e) {
-            logger.debug("[EmployeeController/getEmployee]: " + e.getLocalizedMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        EmployeeModel employee = facadeServices.getEmployee(idEmployee);
+        return new ResponseEntity(employee, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "employee", method = RequestMethod.POST)
     public ResponseEntity<EmployeeModel> addNewEmployee(@RequestBody EmployeeModel newEmployee) throws Exception {
 
-        if (newEmployee == null) {
-            logger.debug("[EmployeeController/addNewEmployee] 'null' employee in request!");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        try {
-            EmployeeModel employee = facadeServices.addNewEmployee(newEmployee);
-            return new ResponseEntity<>(employee, HttpStatus.CREATED);
-        } catch (ServiceException e) {
-            logger.debug("[EmployeeController/addNewEmployee]: " + e.getLocalizedMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        EmployeeModel employee = facadeServices.addNewEmployee(newEmployee);
+        return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
@@ -76,41 +58,23 @@ public class EmployeeController {
     public ResponseEntity updateEmployee(@PathVariable("idEmployee") Long idEmployee,
                                          @RequestBody EmployeeModel employeeModel) throws Exception {
 
-        try {
-            facadeServices.updateEmployee(idEmployee, employeeModel);
-            return new ResponseEntity(HttpStatus.OK);
-
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        } catch (ServiceException e) {
-            logger.debug("[EmployeeController/updateEmployee]: " + e.getLocalizedMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        facadeServices.updateEmployee(idEmployee, employeeModel);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@PathVariable("idEmployee") Long idEmployee) throws Exception {
-        try {
-            facadeServices.deleteEmployee(idEmployee);
-            return new ResponseEntity(HttpStatus.OK);
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        } catch (ServicesException e) {
-            logger.debug("[EmployeeController/deleteEmployee]: " + e.getLocalizedMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
+        facadeServices.deleteEmployee(idEmployee);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     //    @PreAuthorize("hasRole('USER')")
 //    @RequestMapping(value = "employee/{surname}", method = RequestMethod.GET)
     public ResponseEntity getUsersBySurname(@PathVariable("surname") String surname) throws Exception {
-        try {
-            List employees = facadeServices.getEmployee(surname);
-            return new ResponseEntity(employees, HttpStatus.OK);
-        } catch (ServiceException e) {
-            logger.debug("[EmployeeController/getUsersBySurname]: " + e.getLocalizedMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        List employees = facadeServices.getEmployee(surname);
+        return new ResponseEntity(employees, HttpStatus.OK);
     }
 
 

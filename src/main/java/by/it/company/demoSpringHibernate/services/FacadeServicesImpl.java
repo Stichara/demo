@@ -16,6 +16,7 @@ public class FacadeServicesImpl implements IFacadeServices {
 
     @Override
     public EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException {
+        if (newEmployee == null) throw new ServicesException("object can not be empty");
         return employeeService.addNewEmployee(newEmployee);
     }
 
