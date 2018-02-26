@@ -16,28 +16,14 @@ import java.util.stream.Collectors;
 public class UtilsServiceImpl implements IUtilsService {
 
     /**
-     * Method create employee model from employee entity and id
-     * @param id - new employee id
-     * @param employee - employee entity with first name and surname
-     * @return EmployeeModel
-     * @throws ServicesException
-     */
-    @Override
-    public EmployeeModel createEmployeeModel(Long id, Employee employee) throws ServicesException{
-        if ((employee == null)|| (id == null))
-            throw  new ServicesException("Error create model saved employee: parametres can not be null: id ="+id+" employee:"+ employee.toString() );
-        return new EmployeeModel(id, employee.getFirstName(), employee.getSurname());
-    }
-
-    /**
      * Method create employee model from employee entity
      * @param employee - employee entity with first name and surname
-     * @return Optional with EmployeeModel
+     * @return Optional with EmployeeModel of Empty optional
      * @throws ServicesException
      */
     @Override
     public Optional<EmployeeModel> createEmployeeModel(Employee employee) {
-//        if (employee == null) throw new ServicesException("Error create model employee: parameter can not be null");
+        if (employee == null) return Optional.empty();
         return Optional.of(
                 new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname())
         );
@@ -63,7 +49,7 @@ public class UtilsServiceImpl implements IUtilsService {
      */
     @Override
     public Optional<UserModel> createUserModel(User user) {
-//        if (user == null) throw new ServicesException("Error create user model: parameter can not be null");
+        if (user == null) return Optional.empty();
         return Optional.of(new UserModel(user.getLogin(),user.getPswd(),user.getRole().getName()));
     }
 }

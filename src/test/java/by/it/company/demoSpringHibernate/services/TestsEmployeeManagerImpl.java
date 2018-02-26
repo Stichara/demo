@@ -1,11 +1,9 @@
 package by.it.company.demoSpringHibernate.services;
 
 import by.it.company.demoSpringHibernate.dao.entities.Employee;
-import by.it.company.demoSpringHibernate.dao.interfaces.IEmployeeDao;
 import by.it.company.demoSpringHibernate.dao.repositories.EmployeeRepository;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.services.managers.impl.EmployeeManagerImpl;
-import by.it.company.demoSpringHibernate.services.managers.impl.EmployeeManagerImpl2;
 import by.it.company.demoSpringHibernate.services.managers.impl.UtilsServiceImpl;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
 import org.junit.Before;
@@ -33,7 +31,7 @@ public class TestsEmployeeManagerImpl {
     private IUtilsService utilsService = new UtilsServiceImpl();
 
     @InjectMocks
-    private EmployeeManagerImpl2 employeeManager;
+    private EmployeeManagerImpl employeeManager;
 
     @Before
     public void init() throws Exception{
@@ -146,14 +144,14 @@ public class TestsEmployeeManagerImpl {
         employeeModels.add(new EmployeeModel(2L,"name2", "surname"));
         employeeModels.add(new EmployeeModel(3L,"name3", "surname"));
 
-        when(employeeRepository.getEmployeeBySurname(surname)).thenReturn(employees);
-        when(employeeRepository.getEmployeeBySurname(surname2)).thenReturn(new ArrayList());
+        when(employeeRepository.findEmployeeBySurname(surname)).thenReturn(employees);
+        when(employeeRepository.findEmployeeBySurname(surname2)).thenReturn(new ArrayList());
 
         assertEquals(employeeManager.getEmployee(surname),employeeModels);
         List result = employeeManager.getEmployee(surname2);
         assertEquals(result.size(),0);
-        verify(employeeRepository,times(1)).getEmployeeBySurname(surname);
-        verify(employeeRepository,times(1)).getEmployeeBySurname(surname2);
+        verify(employeeRepository,times(1)).findEmployeeBySurname(surname);
+        verify(employeeRepository,times(1)).findEmployeeBySurname(surname2);
         verify(utilsService, times(2)).createEmployeeModelList(anyList());
     }
 }

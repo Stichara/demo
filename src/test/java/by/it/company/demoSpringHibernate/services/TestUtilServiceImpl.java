@@ -38,7 +38,7 @@ public class TestUtilServiceImpl {
     }
 
     @Test
-    public void creaгteEmployeeModelListTest() throws Exception {
+    public void createEmployeeModelListTest() throws Exception {
 
         List<Employee> employees = new ArrayList<>();
         employees.add(new Employee(1L,"name1","surname1"));

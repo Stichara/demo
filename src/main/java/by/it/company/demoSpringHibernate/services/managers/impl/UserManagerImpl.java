@@ -1,22 +1,19 @@
 package by.it.company.demoSpringHibernate.services.managers.impl;
 
 import by.it.company.demoSpringHibernate.dao.entities.User;
-import by.it.company.demoSpringHibernate.dao.interfaces.IUserDao;
 import by.it.company.demoSpringHibernate.dao.repositories.UserRepository;
-import by.it.company.demoSpringHibernate.exceptions.DaoException;
-import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUserManager;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-//import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-//@Transactional
+@Transactional
 public class UserManagerImpl implements IUserManager {
 
     private Logger logger = Logger.getLogger(UserManagerImpl.class);

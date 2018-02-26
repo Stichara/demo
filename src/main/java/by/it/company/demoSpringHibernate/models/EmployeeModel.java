@@ -1,19 +1,18 @@
 package by.it.company.demoSpringHibernate.models;
 
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class EmployeeModel {
 
     public final Long id;
     public final String firstName;
     public final String surname;
 
-    @JsonCreator
-    public EmployeeModel(@JsonProperty("id") Long id,
-                         @JsonProperty("firstName") String firstName,
-                         @JsonProperty("surname") String surname) {
+//    @JsonCreator
+//    public EmployeeModel(@JsonProperty("id") Long id,
+//                         @JsonProperty("firstName") String firstName,
+//                         @JsonProperty("surname") String surname) {
+    public EmployeeModel(Long id,
+                         String firstName,
+                         String surname){
         this.id = id;
         this.firstName = firstName;
         this.surname = surname;

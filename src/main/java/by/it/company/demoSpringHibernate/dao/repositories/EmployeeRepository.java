@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
-    @Query("select e from employee e where e.surname = :surname")
-    List getEmployeeBySurname(@Param("surname") String surname);
+    List findEmployeeBySurname(String surname);
+
+    @Query("select e from Employee  e where e.surname = ?1 and e.firstName = ?2")
+    Employee findEmployeeBySurnameAndFirstName(String surname, String firstName);
 
 }

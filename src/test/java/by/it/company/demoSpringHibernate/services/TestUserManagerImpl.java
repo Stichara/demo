@@ -2,7 +2,6 @@ package by.it.company.demoSpringHibernate.services;
 
 import by.it.company.demoSpringHibernate.dao.entities.Role;
 import by.it.company.demoSpringHibernate.dao.entities.User;
-import by.it.company.demoSpringHibernate.dao.interfaces.IUserDao;
 import by.it.company.demoSpringHibernate.dao.repositories.UserRepository;
 import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.impl.UserManagerImpl;

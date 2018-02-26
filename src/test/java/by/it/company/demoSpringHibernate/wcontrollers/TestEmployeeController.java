@@ -50,7 +50,6 @@ public class TestEmployeeController {
 
     }
 
-
     @Test
     public void getAllEmployeesTest() throws Exception {
 
@@ -100,15 +99,9 @@ public class TestEmployeeController {
     @Test
     public void deleteEmployeeTest() throws Exception {
         doNothing().when(facadeServices).deleteEmployee(1L);
-//        when(facadeServices.deleteEmployee(2L)).thenReturn(false);
 
         mockMvc.perform(delete("/employee/{idEmployee}",1L))
                 .andExpect(status().isOk());
-
-//        mockMvc.perform(delete("/employee/{idEmployee}",2L))
-//                .andExpect(status().isBadRequest());
-
         verify(facadeServices, times(1)).deleteEmployee(1l);
-//        verify(facadeServices, times(1)).deleteEmployee(2l);
     }
 }

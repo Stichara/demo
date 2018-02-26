@@ -9,7 +9,7 @@ public interface IEmployeeManager {
 
     EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException;
 
-   EmployeeModel getEmployee(Long idEmployee) throws ServicesException;
+    EmployeeModel getEmployee(Long idEmployee) throws ServicesException;
 
     List getEmployeesList() throws ServicesException;
 
