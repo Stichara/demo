@@ -8,6 +8,7 @@ import by.it.company.demoSpringHibernate.services.managers.interfaces.IEmployeeM
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,8 +61,8 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      */
     @Override
     public List getEmployeesList(Pageable pageable)  {
-        List employees = employeeRepository.findAll(pageable);
-        return utilsService.createEmployeeModelList(employees);
+        Page<Employee> page = employeeRepository.findAll(pageable);
+        return utilsService.createEmployeeModelListFromPage(page);
     }
 
     /**

@@ -6,9 +6,7 @@ import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -41,6 +39,19 @@ public class UtilsServiceImpl implements IUtilsService {
     @Override
     public List<EmployeeModel> createEmployeeModelList(List<Employee> employees){
         return employees.stream()
+                .map(employee -> new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname()))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Method convert page with employees to employee models list
+     * @param page - page containing employees list
+     * @return - employee models list
+     */
+    @Override
+    public List<EmployeeModel> createEmployeeModelListFromPage(Page<Employee> page) {
+        return page.getContent()
+                .stream()
                 .map(employee -> new EmployeeModel(employee.getId(),employee.getFirstName(),employee.getSurname()))
                 .collect(Collectors.toList());
     }

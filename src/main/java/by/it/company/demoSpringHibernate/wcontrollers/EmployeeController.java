@@ -33,7 +33,6 @@ public class EmployeeController {
     @RequestMapping(value = "employee", method = RequestMethod.GET)
     public ResponseEntity<List> getEmployeesWithPagination(@RequestParam Integer page,
                                                            @RequestParam Integer sizePage) throws Exception {
-
         List employees = facadeServices.getEmployeesList(page,sizePage);
         return new ResponseEntity(employees, HttpStatus.OK);
     }

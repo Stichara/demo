@@ -1,6 +1,7 @@
 package by.it.company.demoSpringHibernate.dao.repositories;
 
 import by.it.company.demoSpringHibernate.dao.entities.Employee;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -31,5 +32,5 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
      * @param pageable - pagination parameters
      * @return list
      */
-    List findAll(Pageable pageable);
+    Page<Employee> findAll(Pageable pageable);
 }

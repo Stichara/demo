@@ -75,7 +75,7 @@ public class TestEmployeeController {
 //        when(facadeServices.getEmployee(2L)).thenReturn(Optional.empty());
 
         mockMvc.perform(get("/employee/{idEmployee}",1))
-//                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
 
 //        mockMvc.perform(get("/employee/{idEmployee}",2))
