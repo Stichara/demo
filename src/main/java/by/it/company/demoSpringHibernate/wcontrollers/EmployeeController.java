@@ -29,15 +29,16 @@ public class EmployeeController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee", method = RequestMethod.GET)
-    public ResponseEntity<List> getAllEmployees() throws Exception {
+    public ResponseEntity<List> getEmployeesWithPagination(@RequestParam Integer page,
+                                                           @RequestParam Integer sizePage) throws Exception {
 
-        List employees = facadeServices.getEmployeesList();
+        List employees = facadeServices.getEmployeesList(page,sizePage);
         return new ResponseEntity(employees, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.GET)
     public ResponseEntity getEmployee(@PathVariable("idEmployee") Long idEmployee) throws Exception {
 
@@ -45,7 +46,7 @@ public class EmployeeController {
         return new ResponseEntity(employee, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "employee", method = RequestMethod.POST)
     public ResponseEntity<EmployeeModel> addNewEmployee(@RequestBody EmployeeModel newEmployee) throws Exception {
 
@@ -53,7 +54,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.PUT)
     public ResponseEntity updateEmployee(@PathVariable("idEmployee") Long idEmployee,
                                          @RequestBody EmployeeModel employeeModel) throws Exception {
@@ -62,7 +63,7 @@ public class EmployeeController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "employee/{idEmployee}", method = RequestMethod.DELETE)
     public ResponseEntity deleteEmployee(@PathVariable("idEmployee") Long idEmployee) throws Exception {
 

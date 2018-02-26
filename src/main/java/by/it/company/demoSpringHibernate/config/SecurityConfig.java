@@ -39,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         //request config
         http.authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
-                .anyRequest().authenticated();
+//                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
         //csrf and resources configuration
         http

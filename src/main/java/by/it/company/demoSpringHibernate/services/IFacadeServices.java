@@ -10,7 +10,7 @@ public interface IFacadeServices {
     // employee methods
     EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException;
 
-    List getEmployeesList() throws ServicesException;
+    List getEmployeesList(Integer page, Integer sizePage) throws ServicesException;
 
     EmployeeModel getEmployee(Long idEmployee) throws ServicesException;
 

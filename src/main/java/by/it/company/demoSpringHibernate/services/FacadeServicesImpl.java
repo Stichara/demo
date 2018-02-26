@@ -3,7 +3,10 @@ package by.it.company.demoSpringHibernate.services;
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IEmployeeManager;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,7 +15,10 @@ import java.util.List;
 public class FacadeServicesImpl implements IFacadeServices {
 
     @Autowired
-    IEmployeeManager employeeService;
+    private IEmployeeManager employeeService;
+
+    @Autowired
+    private IUtilsService utilsService;
 
     @Override
     public EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException {
@@ -21,8 +27,10 @@ public class FacadeServicesImpl implements IFacadeServices {
     }
 
     @Override
-    public List getEmployeesList() throws ServicesException {
-        return employeeService.getEmployeesList();
+    public List getEmployeesList(Integer page, Integer sizePage) throws ServicesException {
+        Sort sort = new Sort(Sort.Direction.ASC,"surname");
+        Pageable pageable = utilsService.createPageable(page,sizePage,sort);
+        return employeeService.getEmployeesList(pageable);
     }
 
     @Override

@@ -6,6 +6,9 @@ import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -51,5 +54,17 @@ public class UtilsServiceImpl implements IUtilsService {
     public Optional<UserModel> createUserModel(User user) {
         if (user == null) return Optional.empty();
         return Optional.of(new UserModel(user.getLogin(),user.getPswd(),user.getRole().getName()));
+    }
+
+    /**
+     * method create Pageable
+     * @param page - Page you want to retrieve.
+     * @param sizePage - Size of the page you want to retrieve.
+     * @param sort - sorting parameter
+     * @return
+     */
+    @Override
+    public Pageable createPageable(Integer page, Integer sizePage,  Sort sort) {
+        return PageRequest.of(page,sizePage, sort);
     }
 }

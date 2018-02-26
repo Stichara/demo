@@ -5,6 +5,8 @@ import by.it.company.demoSpringHibernate.dao.entities.User;
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.models.UserModel;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,4 +18,6 @@ public interface IUtilsService {
     List<EmployeeModel> createEmployeeModelList(List<Employee> employees);
 
     Optional<UserModel> createUserModel(User user);
+
+    Pageable createPageable(Integer page, Integer sizePage, Sort sort);
 }
