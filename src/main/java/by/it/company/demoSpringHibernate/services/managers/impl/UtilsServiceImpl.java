@@ -5,7 +5,7 @@ import by.it.company.demoSpringHibernate.dao.entities.User;
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.models.UserModel;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.UtilsService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class UtilsServiceImpl implements IUtilsService {
+public class UtilsServiceImpl implements UtilsService {
 
     /**
      * Method create employee model from employee entity

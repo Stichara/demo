@@ -2,11 +2,10 @@ package by.it.company.demoSpringHibernate.wcontrollers;
 
 
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
-import by.it.company.demoSpringHibernate.services.IFacadeServices;
+import by.it.company.demoSpringHibernate.services.FacadeServices;
 import by.it.company.demoSpringHibernate.utils.TestUtil;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -33,7 +31,7 @@ public class TestEmployeeController {
     private MockMvc mockMvc;
 
     @Mock
-    private IFacadeServices facadeServices;
+    private FacadeServices facadeServices;
 
     @InjectMocks
     private EmployeeController employeeController = new EmployeeController();
@@ -70,6 +68,8 @@ public class TestEmployeeController {
     @Test
     public void getEmployeeTest() throws Exception {
         EmployeeModel employee = new EmployeeModel(1L,"name","surname" );
+
+
 
         when(facadeServices.getEmployee(1L)).thenReturn(employee);
 //        when(facadeServices.getEmployee(2L)).thenReturn(Optional.empty());

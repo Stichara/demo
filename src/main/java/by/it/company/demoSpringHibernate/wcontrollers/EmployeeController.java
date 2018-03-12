@@ -1,10 +1,8 @@
 package by.it.company.demoSpringHibernate.wcontrollers;
 
-import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
-import by.it.company.demoSpringHibernate.services.IFacadeServices;
+import by.it.company.demoSpringHibernate.services.FacadeServices;
 import org.apache.log4j.Logger;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/")
@@ -21,7 +18,7 @@ public class EmployeeController {
     private Logger logger = Logger.getLogger(EmployeeController.class);
 
     @Autowired
-    IFacadeServices facadeServices;
+    FacadeServices facadeServices;
 
     @RequestMapping(value = "/")
     public ResponseEntity helloPage() {

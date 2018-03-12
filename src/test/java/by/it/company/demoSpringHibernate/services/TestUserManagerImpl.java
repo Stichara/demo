@@ -6,7 +6,7 @@ import by.it.company.demoSpringHibernate.dao.repositories.UserRepository;
 import by.it.company.demoSpringHibernate.models.UserModel;
 import by.it.company.demoSpringHibernate.services.managers.impl.UserManagerImpl;
 import by.it.company.demoSpringHibernate.services.managers.impl.UtilsServiceImpl;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.UtilsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ public class TestUserManagerImpl {
     private UserRepository userRepository;
 
     @Spy
-    private IUtilsService utilsService = new UtilsServiceImpl();
+    private UtilsService utilsService = new UtilsServiceImpl();
 
     @InjectMocks
     private UserManagerImpl userManager;

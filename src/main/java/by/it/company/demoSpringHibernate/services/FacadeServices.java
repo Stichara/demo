@@ -5,7 +5,7 @@ import by.it.company.demoSpringHibernate.models.EmployeeModel;
 
 import java.util.List;
 
-public interface IFacadeServices {
+public interface FacadeServices {
 
     // employee methods
     EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException;

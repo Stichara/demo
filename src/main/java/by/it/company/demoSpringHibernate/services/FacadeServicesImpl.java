@@ -2,8 +2,8 @@ package by.it.company.demoSpringHibernate.services;
 
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IEmployeeManager;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.EmployeeManager;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.UtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class FacadeServicesImpl implements IFacadeServices {
+public class FacadeServicesImpl implements FacadeServices {
 
     @Autowired
-    private IEmployeeManager employeeService;
+    private EmployeeManager employeeService;
 
     @Autowired
-    private IUtilsService utilsService;
+    private UtilsService utilsService;
 
     @Override
     public EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException {

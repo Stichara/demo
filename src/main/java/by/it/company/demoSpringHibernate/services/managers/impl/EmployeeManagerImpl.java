@@ -4,8 +4,8 @@ import by.it.company.demoSpringHibernate.dao.entities.Employee;
 import by.it.company.demoSpringHibernate.dao.repositories.EmployeeRepository;
 import by.it.company.demoSpringHibernate.exceptions.ServicesException;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IEmployeeManager;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.EmployeeManager;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.UtilsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Service
 @Transactional(rollbackFor = {ServicesException.class})
-public class EmployeeManagerImpl implements IEmployeeManager {
+public class EmployeeManagerImpl implements EmployeeManager {
 
     private Logger logger = Logger.getLogger(EmployeeManagerImpl.class);
 
@@ -27,7 +27,7 @@ public class EmployeeManagerImpl implements IEmployeeManager {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    IUtilsService utilsService;
+    UtilsService utilsService;
 
     /**
      * method save new employee into database

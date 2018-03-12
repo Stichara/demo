@@ -5,7 +5,7 @@ import by.it.company.demoSpringHibernate.dao.repositories.EmployeeRepository;
 import by.it.company.demoSpringHibernate.models.EmployeeModel;
 import by.it.company.demoSpringHibernate.services.managers.impl.EmployeeManagerImpl;
 import by.it.company.demoSpringHibernate.services.managers.impl.UtilsServiceImpl;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IUtilsService;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.UtilsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -28,7 +28,7 @@ public class TestsEmployeeManagerImpl {
     private EmployeeRepository employeeRepository;
 
     @Spy
-    private IUtilsService utilsService = new UtilsServiceImpl();
+    private UtilsService utilsService = new UtilsServiceImpl();
 
     @InjectMocks
     private EmployeeManagerImpl employeeManager;

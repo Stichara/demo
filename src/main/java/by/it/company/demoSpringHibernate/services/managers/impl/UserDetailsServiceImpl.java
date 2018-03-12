@@ -1,7 +1,7 @@
 package by.it.company.demoSpringHibernate.services.managers.impl;
 
 import by.it.company.demoSpringHibernate.models.UserModel;
-import by.it.company.demoSpringHibernate.services.managers.interfaces.IUserManager;
+import by.it.company.demoSpringHibernate.services.managers.interfaces.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService{
 
     @Autowired
-    private IUserManager userManager;
+    private UserManager userManager;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
