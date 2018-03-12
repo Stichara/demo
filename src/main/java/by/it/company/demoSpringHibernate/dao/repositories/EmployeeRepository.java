@@ -3,6 +3,7 @@ package by.it.company.demoSpringHibernate.dao.repositories;
 import by.it.company.demoSpringHibernate.dao.entities.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -33,4 +34,14 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
      * @return list
      */
     Page<Employee> findAll(Pageable pageable);
+
+    /**
+     * method delete employee by surname and first name
+     * @param surname - employee`s surname
+     * @param firstName - employee`s first name
+     * @return - number of deleted rows
+     */
+    @Modifying
+    @Query("delete from Employee e where e.surname = ?1 and e.firstName = ?2")
+    int deleteBySurnameAndFirstName(String surname, String firstName);
 }

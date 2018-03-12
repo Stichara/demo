@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = {ServicesException.class})
 public class EmployeeManagerImpl implements IEmployeeManager {
 
     private Logger logger = Logger.getLogger(EmployeeManagerImpl.class);
@@ -117,7 +117,8 @@ public class EmployeeManagerImpl implements IEmployeeManager {
      * @throws ServicesException
      */
     @Override
-    public void deleteEmployee(Long idEmployee) {
+    public void deleteEmployee(Long idEmployee) throws ServicesException {
+        if (idEmployee == null) throw new ServicesException("Invalid employee id");
         employeeRepository.deleteById(idEmployee);
     }
 
