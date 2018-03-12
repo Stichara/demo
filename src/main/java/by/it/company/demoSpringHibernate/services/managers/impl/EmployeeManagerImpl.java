@@ -27,7 +27,7 @@ public class EmployeeManagerImpl implements EmployeeManager {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    UtilsService utilsService;
+    private UtilsService utilsService;
 
     /**
      * method save new employee into database

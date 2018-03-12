@@ -18,7 +18,7 @@ public class EmployeeController {
     private Logger logger = Logger.getLogger(EmployeeController.class);
 
     @Autowired
-    FacadeServices facadeServices;
+    private FacadeServices facadeServices;
 
     @RequestMapping(value = "/")
     public ResponseEntity helloPage() {
