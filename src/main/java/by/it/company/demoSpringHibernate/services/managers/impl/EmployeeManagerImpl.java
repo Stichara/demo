@@ -37,7 +37,7 @@ public class EmployeeManagerImpl implements EmployeeManager {
      */
     @Override
     public EmployeeModel addNewEmployee(EmployeeModel newEmployee) throws ServicesException {
-        Employee employee = employeeRepository.save(new Employee(newEmployee.firstName, newEmployee.surname));
+        Employee employee = employeeRepository.save(new Employee(newEmployee.getFirstName(), newEmployee.getSurname()));
         return utilsService.createEmployeeModel(employee)
                 .orElseThrow(() -> new ServicesException("employee is not created"));
     }
